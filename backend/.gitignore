@@ -1,0 +1,4 @@
+streamfusion
+*.db
+*.db-shm
+*.db-wal

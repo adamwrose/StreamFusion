@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+    environment:
+      SF_ADDR:          ":8080"
+      SF_SQLITE_PATH:   "/data/streamfusion.db"
+      SF_INFLUX_URL:    "http://influxdb:8086"
+      SF_INFLUX_TOKEN:  "${SF_INFLUX_TOKEN}"
+      SF_INFLUX_ORG:    "streamfusion"
+      SF_INFLUX_BUCKET: "metrics"
+    volumes:
+      - backend_data:/data
+    depends_on:
+      - influxdb
+    networks:
+      - internal
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - internal
+
+  influxdb:
+    image: influxdb:2.7-alpine
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE:        setup
+      DOCKER_INFLUXDB_INIT_USERNAME:    admin
+      DOCKER_INFLUXDB_INIT_PASSWORD:    "${INFLUX_ADMIN_PASSWORD}"
+      DOCKER_INFLUXDB_INIT_ORG:         streamfusion
+      DOCKER_INFLUXDB_INIT_BUCKET:      metrics
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: "${SF_INFLUX_TOKEN}"
+    volumes:
+      - influx_data:/var/lib/influxdb2
+    networks:
+      - internal
+
+volumes:
+  backend_data:
+  influx_data:
+
+networks:
+  internal:

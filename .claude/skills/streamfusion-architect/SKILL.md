@@ -95,5 +95,5 @@ When asked to build a feature:
 
 ### How to "Feed" this to the Agent:
 If you are using the `claude` CLI or Web UI, start your session with:
-> "I am attaching a markdown file called `streamfusion-architect.md`. Read it carefully. It contains the strict architectural rules for my Go streaming app. Do not deviate from these libraries or this structure. Let's start by generating the project folder structure."
+> "Use the skill called `streamfusion-architect.md`. Read it carefully. It contains the strict architectural rules for my Go streaming app. Do not deviate from these libraries or this structure. Let's start by generating the project folder structure."
 

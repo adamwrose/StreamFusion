@@ -1,0 +1,14 @@
+/* StreamFusion CSS Variables — all theming tokens live here.
+   Override these at runtime from the theme JSON stored in SQLite. */
+:root {
+  --primary:        #6441a5;   /* Twitch purple default */
+  --secondary:      #1f1f23;
+  --background:     #0e0e10;
+  --surface:        #18181b;
+  --text:           #efeff1;
+  --text-muted:     #adadb8;
+  --accent:         #bf94ff;
+  --danger:         #eb0400;
+  --border-radius:  6px;
+  --font-family:    'Inter', sans-serif;
+}
